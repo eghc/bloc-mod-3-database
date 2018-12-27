@@ -1,0 +1,120 @@
+#1 
+INSERT INTO table VALUES (id,x,y,...);
+
+UPDATE table SET x = __ WHERE id = __ AND ....;
+
+DELTE FROM table WHERE id = __ AND ...;
+
+ALTER TABLE table ADD COLUMN name type;
+
+ALTER TABLE table DROP COLUMN name;
+
+DROP TABLE table;
+
+
+#2 
+INSERT INTO table VALUES (id,x,y,...); ==> 'table' is which table you are inserting into the database. (id, x, y...) are the values of each column for the row you are inserting.
+
+UPDATE table SET x = __ WHERE id = __ AND .... ==> 'table' is which table you are updating values in. 'x' is which column you are updating and anything after the where clause is which rows you are updating.
+
+
+DELTE FROM table WHERE id = __ AND ... ==> 'table' is which table you are removing values from. Any conditions after the where clause will delete any rows that meet those conditions.
+
+ALTER TABLE table ADD COLUMN name type ==> 'table' is which table you are adding a column to. 'name' is the name of the column you are adding. 'type' is the type of data that will be stored in that column.
+
+ALTER TABLE table DROP COLUMN name; ==> 'table' is which table you are removing a column from. 'name' is the name of the column you are removing from the table. 
+
+DROP TABLE table; ==> 'table' is which table you are deleting.
+
+
+#3 
+All examples for each data type are about a users table that stores all users for an app.
+
+Text: first names, last names, emails, etc.
+Boolean: logged in, active, etc.
+Date & Time: created at, last logged in, updated at, etc.
+Numbers: phone number, points, etc.
+
+
+#4
+a. First and last name: Text
+   RSVP: Boolean
+   Number of guests: Integer
+   Number of meals: Integer
+
+b. CREATE TABLE wedding_guests 
+   (firstname text, 
+   lastname text, 
+   RSVP boolean, 
+   guests integer, 
+   meals integer);
+
+c. CREATE TABLE wedding_dinner();
+
+d. ALTER TABLE wedding_guests ADD COLUMN thankyoucard boolean;
+
+e. ALTER TABLE wedding_dinner ADD COLUMN meals integer;
+   ALTER TABLE wedding_guests DROP COLUMN meals;
+
+f. ALTER TABLE wedding_guests ADD COLUMN table integer;
+
+g. ALTER TABLE wedding_guests DROP COLUMN table;
+
+
+#5 CREATE TABLE books 
+   (ISBN bigint, 
+   title text,
+   author text,
+   genre text,
+   publish date,
+   totalcopies integer, 
+   availcopies integer);
+
+a. INSERT INTO books (ISBN, title, author, genre, publish, totalcopies, availcopies) VALUES 
+(9780061122415, 'The Alchemist','Paulo Coelho', 'Fiction', TIMESTAMP '2006-04-25 00:00:00', 3, 2),
+(1524763136, 'Becoming','Michelle Obama', 'Biographies', TIMESTAMP '2018-11-13 00:00:00', 3, 1),
+(1607747308, 'The Life-Changing Magic of Tidying Up: The Japanese Art of Decluttering and Organizing','Marie Kondō', 'Home Improvement', TIMESTAMP '2014-10-14 00:00:00', 3, 0);
+
+b. UPDATE books SET availcopies = availcopies-1 WHERE ISBN = 1524763136;
+
+c. DELETE FROM books WHERE ISBN = 1607747308;
+
+
+#6 CREATE TABLE spacecrafts 
+   (id bigint, 
+   name text,
+   launch date,
+   country text,
+   description text,
+   orbiting text,
+   operating boolean,
+   distance bigint);
+
+a. INSERT INTO spacecrafts VALUES
+(26734, '2001 Mars Odyssey', TIMESTAMP '2001-04-07 00:00:00', 'USA','Helping determine if life existed on Mars', 'Mars', TRUE, 33900000),
+(24648, 'Mars Global Surveyor', TIMESTAMP '1996-11-07 00:00:00', 'USA','Determine if water existed on Mars', 'Mars', FALSE, 33900000),
+(39378, 'MAVEN', TIMESTAMP '2013-11-18 00:00:00', 'USA','Study atmosphere of Mars', 'Mars', TRUE, 33900000);
+
+b. DELETE FROM spacecrafts WHERE id = 24648;
+
+c. UPDATE spacecrafts SET operating = FALSE WHERE id = 26734;
+
+
+#7 CREATE TABLE emails 
+   (id bigint, 
+   subject text,
+   body text,
+   sender text,
+   recipients text[],
+   sent date,
+   read boolean,
+   chainid bigint);
+
+a. INSERT INTO emails VALUES
+(9000, 'Free stuff!', 'Hey I have free stuff, want it?', 'spammer@gmail.com', '{}', TIMESTAMP '2018-12-16 12:00:00', TRUE, 0),
+(9001, 'Coming over this Sunday?', 'Hey will yall be coming this Sunday?', 'mom@gmail.com', '{"sister@gmail.com"}', TIMESTAMP '2018-12-27 12:00:00', TRUE, 500),
+(9002, 'Coming over this Sunday?', 'Yes mom!', 'sister@gmail.com', '{"mom@gmail.com"}', TIMESTAMP '2018-12-27 12:05:00', TRUE, 500);
+
+b. DELETE FROM emails WHERE id = 9000;
+
+c. UPDATE emails SET read = FALSE WHERE id = 9002;
