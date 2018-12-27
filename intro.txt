@@ -1,0 +1,56 @@
+#1 What data types do each of these values represent?
+
+"A Clockwork Orange" - String
+42 - Integer
+09/02/1945 - Date
+98.7 - Float
+$15.99 - Float
+
+
+#2 Explain when a database would be used. Explain when a text file would be used.
+Databases are used in most apps. Typically apps save your data so it needs to go somewhere permanently. For example, with Instagram, if you had to repost all your pictures, get new followers, find the people you want to follow, etc. every time you opened it, you would never use it! Now all that data is stored in database so that anywhere you log in, you can access all that data. Typically, files are not used to store this data because if multiple users are trying to update a file, someone's data will not be stored. 
+
+
+#3 Describe one difference between SQL and other programming languages.
+SQL is just used to describe what you are looking for, it cannot be used by itself to create UI components or a backend API.
+
+
+#4 In your own words, explain how the pieces of a database system fit together at a high level.
+Databases are applications that store data. They can come in many forms; some can be accessed through a command line and some through a GUI. Databases will be made up of tables with different names and each row of data in a table will have a unique identifier within that table. 
+
+
+#5 Explain the meaning of table, row, column, and value.
+A database is made of many tables. Each table is used to typically a collection of data. For example, one table contains responses to completed forms whereas another table contains information about users, but those tables can be in the same database. Within a table, there are different columns that describes what each value is. Each row is a single collection of data. For example, a row in the user table describes a single user. A value is the data in a row and column. For example, the user table can have an email column where one user has a value of "eghclayton@gmail.com" there.
+
+
+#6 List three data types that can be used in a table.
+String
+Integer
+Float
+
+
+#7 Given this payments table, provide an English description of the following queries and include their results:
+
+Query #1 - What are all the dates and amounts of each payment in the payments table?
+
+Query #2 - What are all the amounts in payments table that are over 500?
+
+Query #3 - What is all the information about each payment in the payments table where payee is "Mega Foods"?
+
+
+#8 Given this users table, write SQL queries using the following criteria and include the output:
+
+Query #1
+SELECT email, signup 
+FROM users
+WHERE name = 'DeAndre Data';
+
+Query #2
+SELECT userid
+FROM users
+WHERE email = 'aleesia.algorithm@uw.edu';
+
+Query #3
+SELECT *
+FROM users
+WHERE userid = 4;
