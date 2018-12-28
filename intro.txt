@@ -31,26 +31,79 @@ Float
 
 #7 Given this payments table, provide an English description of the following queries and include their results:
 
-Query #1 - What are all the dates and amounts of each payment in the payments table?
+Query #1
 
-Query #2 - What are all the amounts in payments table that are over 500?
+    SELECT date, amount
+         FROM payments;
 
-Query #3 - What is all the information about each payment in the payments table where payee is "Mega Foods"?
+| date                     | amount    |
+| ------------------------ | --------- |
+| 2016-05-01T00:00:00.000Z | 1500.0000 |
+| 2016-05-10T00:00:00.000Z | 37.0000   |
+| 2016-05-15T00:00:00.000Z | 124.9300  |
+| 2016-05-23T00:00:00.000Z | 54.7200   |
+
+---
+
+
+Query #2
+
+
+| amount    |
+| --------- |
+| 1500.0000 |
+
+---
+
+
+Query #3
+
+    SELECT *
+         FROM payments
+         WHERE payee = 'Mega Foods';
+
+| date                     | payee      | amount   | memo      |
+| ------------------------ | ---------- | -------- | --------- |
+| 2016-05-15T00:00:00.000Z | Mega Foods | 124.9300 | Groceries |
+
+
 
 
 #8 Given this users table, write SQL queries using the following criteria and include the output:
 
+
 Query #1
-SELECT email, signup 
-FROM users
-WHERE name = 'DeAndre Data';
+
+    SELECT email, signup 
+    FROM users
+    WHERE name = 'DeAndre Data';
+
+| email             | signup                   |
+| ----------------- | ------------------------ |
+| datad@comcast.net | 2008-01-20T00:00:00.000Z |
+
+---
 
 Query #2
-SELECT userid
-FROM users
-WHERE email = 'aleesia.algorithm@uw.edu';
+
+    SELECT userid
+    FROM users
+    WHERE email = 'aleesia.algorithm@uw.edu';
+
+| userid |
+| ------ |
+| 1      |
+
+---
 
 Query #3
-SELECT *
-FROM users
-WHERE userid = 4;
+
+    SELECT *
+    FROM users
+    WHERE userid = 4;
+
+| userid | name           | email             | signup                   |
+| ------ | -------------- | ----------------- | ------------------------ |
+| 4      | Brandy Boolean | bboolean@nasa.gov | 1999-10-15T00:00:00.000Z |
+
+---
