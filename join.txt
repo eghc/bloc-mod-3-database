@@ -1,0 +1,196 @@
+#1 You can utilize a JOIN statement to find data that is related to each other.
+
+
+#2 INNER JOIN is data that is related to each other in two different tables where none of the rows have null values in the joining key.
+LEFT OUTER JOIN performs an inner join first. Any row in table1 that does not have a value the joining field in table2 will default to a null value.
+RIGHT OUTER JOIN also performs an inner join first. Any row in table2 that does not have a value in the joining field in table1 will default to a null value.
+
+
+#3 Primary keys are unique identifiers for every value in a table. Foreign keys are identifiers are identifiers in a table that are primary keys in another table. For example, at my work, our clients have these subaccounts in their account. Each client has an unique ID and each subaccount has an unique ID. In the subaccount table, each row is a subaccount with its primary key, the client ID, and some other data about the subaccount. The client ID would be the foreign key since many subaccounts can have the same client ID and it used to join on the clients table.
+
+
+#4 Aliasing is used to refer tables by something other than their name. It is pretty common to use to avoid having to rewrite the name of the table multiple times in a query.
+
+
+#5 SELECT p.name, c.salary, c.vacation_days
+FROM professor p
+JOIN compensation c 
+ON p.id = c.professor_id;
+
+
+#6 NATURAL JOIN will join two tables on their columns that are common keys. For example, in a library, a transaction table might include the isbn, title, and author of the book that was checked out. In the books table, there is the isbn, title, author, publish date, available counts, etc. If you were to use NATURAL JOIN on the transaction table and the books table, the join will occur on the isbn, title, and author columns. 
+
+
+#7
+**Query #1**
+
+    SELECT s.date, s.start_time, s.end_time, e.name
+    FROM employees e
+    JOIN scheduled_shifts ss
+    ON ss.employee_id = e.id
+    JOIN shifts s
+    ON s.id = ss.shift_id
+    ORDER BY date, s.start_time;
+
+| date       | start_time | end_time | name             |
+| ---------- | ---------- | -------- | ---------------- |
+| 1998-03-09 | 08:00:00   | 12:00:00 | Padma Patil      |
+| 1998-03-09 | 08:00:00   | 16:00:00 | Hermione Granger |
+| 1998-03-09 | 12:00:00   | 16:00:00 | Luna Lovegood    |
+| 1998-03-09 | 12:00:00   | 20:00:00 | Padma Patil      |
+| 1998-03-09 | 16:00:00   | 20:00:00 | Dean Thomas      |
+| 1998-03-10 | 08:00:00   | 12:00:00 | Padma Patil      |
+| 1998-03-10 | 08:00:00   | 16:00:00 | Hermione Granger |
+| 1998-03-10 | 12:00:00   | 16:00:00 | Ronald Weasley   |
+| 1998-03-10 | 12:00:00   | 20:00:00 | Padma Patil      |
+| 1998-03-10 | 16:00:00   | 20:00:00 | Dean Thomas      |
+| 1998-03-11 | 08:00:00   | 16:00:00 | Hermione Granger |
+| 1998-03-11 | 08:00:00   | 12:00:00 | Padma Patil      |
+| 1998-03-11 | 12:00:00   | 16:00:00 | Luna Lovegood    |
+| 1998-03-11 | 12:00:00   | 20:00:00 | Padma Patil      |
+| 1998-03-11 | 16:00:00   | 20:00:00 | Draco Malfoy     |
+| 1998-03-12 | 08:00:00   | 16:00:00 | Hermione Granger |
+| 1998-03-12 | 12:00:00   | 20:00:00 | Cho Chang        |
+| 1998-03-12 | 12:00:00   | 16:00:00 | Ronald Weasley   |
+| 1998-03-12 | 16:00:00   | 20:00:00 | Draco Malfoy     |
+| 1998-03-13 | 08:00:00   | 16:00:00 | Hermione Granger |
+| 1998-03-13 | 12:00:00   | 20:00:00 | Cho Chang        |
+| 1998-03-13 | 12:00:00   | 16:00:00 | Luna Lovegood    |
+| 1998-03-13 | 16:00:00   | 20:00:00 | Draco Malfoy     |
+
+---
+
+#8
+**Query #1**
+
+    SELECT v.id, v.first_name, v.last_name,d.id as dog_id, d.name as dog_name
+    FROM volunteers v
+    LEFT OUTER JOIN dogs d
+    ON d.id = v.foster_dog_id;
+
+| id  | first_name | last_name  | dog_id | dog_name  |
+| --- | ---------- | ---------- | ------ | --------- |
+| 2   | Rubeus     | Hagrid     | 10002  | Munchkin  |
+| 5   | Marjorie   | Dursley    | 10006  | Marmaduke |
+| 4   | Sirius     | Black      |        |           |
+| 3   | Remus      | Lupin      |        |           |
+| 1   | Albus      | Dumbledore |        |           |
+
+---
+**Query #2**
+
+    SELECT c.name as cat_name, a.first_name, a.last_name
+    FROM cats c
+    JOIN cat_adoptions ca
+    ON c.id = ca.cat_id
+    JOIN adopters a
+    ON ca.adopter_id = a.id
+    WHERE ca.date > CURRENT_DATE - INTERVAL '1 month';
+
+| cat_name | first_name | last_name |
+| -------- | ---------- | --------- |
+| Mushi    | Arabella   | Figg      |
+| Victoire | Argus      | Filch     |
+
+---
+**Query #3**
+
+    SELECT a.id, a.first_name, a.last_name, a.address, a.phone_number
+    FROM adopters a
+    LEFT OUTER JOIN dog_adoptions da
+    ON a.id = da.adopter_id
+    WHERE da.adopter_id IS NULL;
+
+| id  | first_name | last_name | address             | phone_number |
+| --- | ---------- | --------- | ------------------- | ------------ |
+| 1   | Hermione   | Granger   | 32 Granger's Street | 676-464-7837 |
+| 2   | Arabella   | Figg      | 4 Wisteria Walk     | 843-228-5239 |
+
+---
+**Query #4**
+
+    SELECT d.name, d.gender, d.age, d.weight, d.breed, d.intake_date, d.in_foster
+    FROM dog_adoptions da
+    RIGHT OUTER JOIN dogs d
+    ON da.dog_id = d.id
+    WHERE da.dog_id IS NULL;
+
+| name      | gender | age | weight | breed              | intake_date              | in_foster |
+| --------- | ------ | --- | ------ | ------------------ | ------------------------ | --------- |
+| Boujee    | F      | 3   | 36     | labrador poodle    | 2017-06-22T00:00:00.000Z |           |
+| Munchkin  | F      | 0   | 8      | dachsund chihuahua | 2017-01-13T00:00:00.000Z |           |
+| Marley    | M      | 0   | 10     | labrador           | 2017-05-04T00:00:00.000Z |           |
+| Lassie    | F      | 7   | 17     | collie shepherd    | 2016-07-05T00:00:00.000Z |           |
+| Marmaduke | M      | 7   | 150    | great dane         | 2016-03-22T00:00:00.000Z |           |
+
+---
+**Query #5**
+
+    SELECT c.name, c.gender, c.age, c.intake_date, c.adoption_date
+    FROM cats c
+    LEFT OUTER JOIN cat_adoptions ca
+    ON ca.cat_id = c.id
+    WHERE ca.cat_id IS NULL;
+
+| name     | gender | age | intake_date              | adoption_date |
+| -------- | ------ | --- | ------------------------ | ------------- |
+| Seashell | F      | 7   | 2016-01-09T00:00:00.000Z |               |
+| Nala     | F      | 1   | 2016-01-12T00:00:00.000Z |               |
+
+---
+**Query #6**
+
+    SELECT a.first_name, a.last_name 
+    FROM dogs d
+    JOIN dog_adoptions da
+    ON da.dog_id = d.id
+    JOIN adopters a
+    ON da.adopter_id = a.id
+    WHERE d.name like 'Rosco';
+
+| first_name | last_name |
+| ---------- | --------- |
+| Argus      | Filch     |
+
+---
+
+
+#9
+**Query #1**
+
+    SELECT h.rank, p.name
+    FROM books b
+    INNER JOIN holds h
+    ON b.isbn = h.isbn
+    INNER JOIN patrons p
+    ON h.patron_id = p.id
+    WHERE b.title = 'Advanced Potion-Making'
+    ORDER BY h.rank;
+
+| rank | name           |
+| ---- | -------------- |
+| 1    | Terry Boot     |
+| 2    | Cedric Diggory |
+
+---
+**Query #2**
+
+    SELECT p.id, p.name, b.isbn, b.title, b.author
+    FROM patrons p
+    LEFT OUTER JOIN transactions t
+    ON t.patron_id = p.id
+    JOIN books b
+    ON t.isbn = b.isbn
+    ORDER BY p.id;
+
+| id  | name             | isbn       | title                                   | author           |
+| --- | ---------------- | ---------- | --------------------------------------- | ---------------- |
+| 1   | Hermione Granger | 3458400871 | Fantastic Beasts and Where to Find Them | Newt Scamander   |
+| 1   | Hermione Granger | 1840918626 | Hogwarts: A History                     | Bathilda Bagshot |
+| 2   | Terry Boot       | 9136884926 | Advanced Potion-Making                  | Libatius Borage  |
+| 2   | Terry Boot       | 3458400871 | Fantastic Beasts and Where to Find Them | Newt Scamander   |
+| 3   | Padma Patil      | 3458400871 | Fantastic Beasts and Where to Find Them | Newt Scamander   |
+| 4   | Cho Chang        | 9136884926 | Advanced Potion-Making                  | Libatius Borage  |
+| 5   | Cedric Diggory   | 3458400871 | Fantastic Beasts and Where to Find Them | Newt Scamander   |
+
+---
