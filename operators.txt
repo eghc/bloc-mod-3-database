@@ -1,0 +1,189 @@
+#1
+SELECT * FROM dogs;
+
+#2
+SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY
+
+SQL
+For the
+Win!
+Get that
+Hallulla*
+Old Friend!
+
+*Hallulla is a type of bread :D
+
+
+#3
+**Query #1**
+
+    SELECT name, gender, age FROM dogs WHERE breed LIKE '%labrador%';
+
+| name   | gender | age |
+| ------ | ------ | --- |
+| Boujee | F      | 3   |
+| Marley | M      | 0   |
+
+---
+**Query #2**
+
+    SELECT id FROM dogs WHERE age < 1;
+
+| id    |
+| ----- |
+| 10002 |
+| 10004 |
+
+---
+**Query #3**
+
+    SELECT name, age FROM dogs WHERE gender = 'F' AND weight > 35;
+
+| name   | age |
+| ------ | --- |
+| Boujee | 3   |
+
+---
+**Query #4**
+
+    SELECT * FROM dogs WHERE breed NOT LIKE '%shepherd%';
+
+| id    | name      | gender | age | weight | breed              | intake_date              | in_foster                |
+| ----- | --------- | ------ | --- | ------ | ------------------ | ------------------------ | ------------------------ |
+| 10001 | Boujee    | F      | 3   | 36     | labrador poodle    | 2017-06-22T00:00:00.000Z |                          |
+| 10002 | Munchkin  | F      | 0   | 8      | dachsund chihuahua | 2017-01-13T00:00:00.000Z | 2017-01-31T00:00:00.000Z |
+| 10004 | Marley    | M      | 0   | 10     | labrador           | 2017-05-04T00:00:00.000Z | 2016-06-20T00:00:00.000Z |
+| 10006 | Marmaduke | M      | 7   | 150    | great dane         | 2016-03-22T00:00:00.000Z | 2016-05-15T00:00:00.000Z |
+| 10007 | Rosco     | M      | 5   | 180    | rottweiler         | 2017-04-01T00:00:00.000Z |                          |
+
+---
+**Query #5**
+
+    SELECT id, age, weight, breed FROM dogs WHERE weight > 60 OR breed LIKE '%great dane%';
+
+| id    | age | weight | breed      |
+| ----- | --- | ------ | ---------- |
+| 10006 | 7   | 150    | great dane |
+| 10007 | 5   | 180    | rottweiler |
+
+---
+
+
+#4
+**Query #1**
+
+    SELECT name, adoption_date FROM cats;
+
+| name     | adoption_date            |
+| -------- | ------------------------ |
+| Mushi    | 2016-03-22T00:00:00.000Z |
+| Seashell |                          |
+| Azul     | 2016-04-17T00:00:00.000Z |
+| Victoire | 2016-09-01T00:00:00.000Z |
+| Nala     |                          |
+
+---
+**Query #2**
+
+    SELECT name, age FROM cats;
+
+| name     | age |
+| -------- | --- |
+| Mushi    | 1   |
+| Seashell | 7   |
+| Azul     | 3   |
+| Victoire | 7   |
+| Nala     | 1   |
+
+---
+
+
+#5
+**Query #1**
+
+    SELECT *
+    FROM cats;
+
+| id  | name     | gender | age | intake_date              | adoption_date            |
+| --- | -------- | ------ | --- | ------------------------ | ------------------------ |
+| 1   | Mushi    | M      | 1   | 2016-01-09T00:00:00.000Z | 2016-03-22T00:00:00.000Z |
+| 2   | Seashell | F      | 7   | 2016-01-09T00:00:00.000Z |                          |
+| 3   | Azul     | M      | 3   | 2016-01-11T00:00:00.000Z | 2016-04-17T00:00:00.000Z |
+| 4   | Victoire | M      | 7   | 2016-01-11T00:00:00.000Z | 2016-09-01T00:00:00.000Z |
+| 5   | Nala     | F      | 1   | 2016-01-12T00:00:00.000Z |                          |
+
+---
+**Query #2**
+
+    SELECT name, gender
+    FROM cats
+    WHERE age = 7;
+
+| name     | gender |
+| -------- | ------ |
+| Seashell | F      |
+| Victoire | M      |
+
+---
+**Query #3**
+
+    SELECT name
+    FROM cats;
+
+| name     |
+| -------- |
+| Mushi    |
+| Seashell |
+| Azul     |
+| Victoire |
+| Nala     |
+
+---
+
+
+#6
+Less than(<) - Let's say you have store and want to create a "$10 and under" section. To find all the items that meet this criteria, the less than operator could be used when searching for items in an inventory that are less than $10. 
+
+Greater than (>) - If you have a store and you are trying to determine which items have been popular, you can find the difference between the original count and the available count and if it is greater than a certain amount. For example: SELECT * FROM inventory WHERE (initialcount - availablecount) > 10;
+
+Equal to (=) - If you run a second hand store, you probably want to store the nicer items behind the counter. You would probably use this operator to find every item that is from the Chanel.
+
+Not equal to (!=) - Sometimes tables will have null values if it was not given a value at some point. Let's say you added a new column to your items table that determines if the item was a returned item or not. You did not go back and update the other items because you could not remember. Later, you want to determine the count of items returned vs. new. For example; SELECT returned, COUNT(*) FROM items WHERE returned != NULL GROUP BY returned;
+
+LIKE - I currently use SQL everyday at my job and I use this operator frequently to find the id for certain clients. For example: SELECT id FROM clients WHERE name LIKE '%Bloc%'
+
+
+
+#7
+**Query #1**
+
+    SELECT name FROM cats WHERE gender = 'F';
+
+| name     |
+| -------- |
+| Seashell |
+| Nala     |
+
+---
+**Query #2**
+
+    SELECT name FROM cats WHERE age <> 3;
+
+| name     |
+| -------- |
+| Mushi    |
+| Seashell |
+| Victoire |
+| Nala     |
+
+---
+**Query #3**
+
+    SELECT ID FROM cats WHERE name != 'Mushi' AND gender = 'M';
+
+| id  |
+| --- |
+| 3   |
+| 4   |
+
+---
