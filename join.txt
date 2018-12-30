@@ -174,23 +174,18 @@ ON p.id = c.professor_id;
 
 ---
 **Query #2**
-
     SELECT p.id, p.name, b.isbn, b.title, b.author
-    FROM patrons p
-    LEFT OUTER JOIN transactions t
-    ON t.patron_id = p.id
-    JOIN books b
-    ON t.isbn = b.isbn
-    ORDER BY p.id;
+        FROM patrons p
+        LEFT OUTER JOIN transactions t
+        ON t.patron_id = p.id
+        JOIN books b
+        ON t.isbn = b.isbn
+        WHERE t.checked_in_date IS NULL
+        ORDER BY p.id;
 
-| id  | name             | isbn       | title                                   | author           |
-| --- | ---------------- | ---------- | --------------------------------------- | ---------------- |
-| 1   | Hermione Granger | 3458400871 | Fantastic Beasts and Where to Find Them | Newt Scamander   |
-| 1   | Hermione Granger | 1840918626 | Hogwarts: A History                     | Bathilda Bagshot |
-| 2   | Terry Boot       | 9136884926 | Advanced Potion-Making                  | Libatius Borage  |
-| 2   | Terry Boot       | 3458400871 | Fantastic Beasts and Where to Find Them | Newt Scamander   |
-| 3   | Padma Patil      | 3458400871 | Fantastic Beasts and Where to Find Them | Newt Scamander   |
-| 4   | Cho Chang        | 9136884926 | Advanced Potion-Making                  | Libatius Borage  |
-| 5   | Cedric Diggory   | 3458400871 | Fantastic Beasts and Where to Find Them | Newt Scamander   |
+| id  | name           | isbn       | title                                   | author          |
+| --- | -------------- | ---------- | --------------------------------------- | --------------- |
+| 2   | Terry Boot     | 9136884926 | Advanced Potion-Making                  | Libatius Borage |
+| 5   | Cedric Diggory | 3458400871 | Fantastic Beasts and Where to Find Them | Newt Scamander  |
 
 ---
